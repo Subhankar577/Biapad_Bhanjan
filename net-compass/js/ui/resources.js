@@ -121,7 +121,10 @@ function folderHelper(state) {
   const tree = folderTree(state);
   return `<div class="card" style="border-color:color-mix(in srgb,var(--brand) 30%, transparent)">
     <div class="row between mb"><span class="card-title">${bi('Folder helper', 'ফোল্ডার হেল্পার')}</span>
-      <button class="btn btn-xs" data-act="res.copyfolders">${icon('download', 13)} ${bi('Copy', 'কপি')}</button></div>
+      <div class="row" style="gap:5px">
+        <button class="btn btn-xs" data-act="res.copyfolders">${icon('download', 13)} ${bi('Copy', 'কপি')}</button>
+        <button class="btn btn-xs btn-ghost" data-act="res.printfolders">${bi('Print', 'প্রিন্ট')}</button>
+      </div></div>
     <pre id="folder-tree" style="font-size:.62rem;line-height:1.5;overflow-x:auto;background:var(--surface-2);border-radius:10px;padding:10px;margin:0;color:var(--ink-2)">${esc(tree)}</pre>
     <div class="hint mt">${bi('Naming convention: U01_C05_GraphTheory_Notes.pdf', 'নামকরণ: U01_C05_GraphTheory_Notes.pdf')}</div>
     <div class="note-band mt">${icon('info', 15)} <span>${bi('Tip: keep a Resources.txt in each unit folder with your pinned links as a backup.', 'টিপ: প্রতিটি ইউনিট ফোল্ডারে Resources.txt-এ পিন করা লিংক ব্যাকআপ হিসেবে রাখো।')}</span></div>
@@ -135,6 +138,17 @@ register('res.unit', ({ data }) => { rUnit = data.u; R.refresh(); });
 register('res.source', ({ data }) => { rSource = data.v; R.refresh(); });
 register('res.type', ({ value }) => { rType = value; R.refresh(); });
 register('res.folders', () => { showFolders = !showFolders; R.refresh(); });
+register('res.printfolders', () => {
+  const tree = folderTree(R.state);
+  R.openSheet({
+    title: bi('Folder structure', 'ফোল্ডার স্ট্রাকচার'),
+    sub: bi('Print it and keep it next to your desk.', 'প্রিন্ট করে ডেস্কের পাশে রাখো।'),
+    body: `<pre style="font-size:.66rem;line-height:1.6;white-space:pre-wrap">${esc(tree)}</pre>
+      <div class="hint mt">${bi('Naming convention: U01_C05_GraphTheory_Notes.pdf', 'নামকরণ: U01_C05_GraphTheory_Notes.pdf')}</div>
+      <button class="btn btn-primary btn-block mt" data-act="res.doprint">${icon('download', 15)} ${bi('Print / save as PDF', 'প্রিন্ট / PDF সেভ')}</button>`
+  });
+});
+register('res.doprint', () => { setTimeout(() => window.print(), 150); });
 register('res.copyfolders', () => {
   const el = document.getElementById('folder-tree');
   if (el) copyText(el.textContent).then(() => R.toast(bi('Folder tree copied.', 'ফোল্ডার ট্রি কপি হয়েছে।'), 'ok'));
