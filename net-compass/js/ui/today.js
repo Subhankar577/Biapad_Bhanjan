@@ -326,12 +326,13 @@ register('coach.sync', ({ data }) => {
   const state = R.state;
   const key = data.key;
   const cid = data.cid;
-  const today_ = todayKey();
   const clusterDone = (state.clusters || {})[cid] && ['done', 'done-revisit', 'needs-help'].includes(state.clusters[cid].status);
   if (clusterDone) {
     state.revisions = state.revisions || [];
     state.revisions.push({ id: `${cid}-coach-${key}`, clusterId: cid, due: addDays(key, 1), offset: 1, done: false, kind: 'coached' });
     state.clusters[cid].coachedRevision = true;
+    state.changelog = state.changelog || [];
+    state.changelog.unshift({ at: new Date().toISOString(), kind: 'coaching', reason: `Coached revision queued → ${cid}` });
     R.save();
     R.toast(bi('Cluster already done — added to the coached-revision queue.', 'ক্লাস্টার আগেই শেষ — কোচড রিভিশন কিউতে যোগ হয়েছে।'), 'ok');
     R.refresh();
