@@ -149,7 +149,7 @@ export function render(state, param, App) {
     ${!isRest ? `<div class="mt">${progressBar(Math.min(100, Math.round((prog.done / (targetMin || 1)) * 100)), prog.complete ? 'ok' : '')}</div>` : ''}
   </div>
 
-  <div class="mini-grid mt">
+  <div class="stat-grid mt">
     <div class="stat"><div class="stat-v">${streak(state)}<span class="tiny muted"> d</span></div><div class="stat-k">${bi('streak', 'স্ট্রিক')}</div></div>
     <div class="stat"><div class="stat-v">${rev + cardsDue}</div><div class="stat-k">${bi('revision due', 'রিভিশন বাকি')}</div></div>
     <div class="stat"><div class="stat-v" style="${back.length > 3 ? 'color:var(--bad)' : ''}">${back.length}</div><div class="stat-k">${bi('backlog', 'ব্যাকলগ')}</div></div>

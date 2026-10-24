@@ -17,24 +17,24 @@
   --surface-3: #f1efe8;
   --ink: #151824;
   --ink-2: #3d4356;
-  --muted: #6d7488;
+  --muted: #63697d;
   --line: #e6e3d9;
   --line-2: #ece9e0;
   --brand: #3b3aa8;
   --brand-2: #6355d8;
   --brand-ink: #ffffff;
   --brand-soft: #eceafd;
-  --gold: #d99a2b;
+  --gold: #8a6212;
   --gold-soft: #fdf1da;
-  --ok: #168a5f;
+  --ok: #12764f;
   --ok-soft: #e2f5ec;
-  --warn: #b8790a;
+  --warn: #8f5c06;
   --warn-soft: #fdf0d5;
-  --bad: #c9483f;
+  --bad: #b03a32;
   --bad-soft: #fde9e7;
   --info: #2563b8;
   --info-soft: #e7effb;
-  --rest: #6b7fa8;
+  --rest: #55688f;
   --rest-soft: #eaeef7;
 
   --r-xs: 8px; --r-sm: 12px; --r: 16px; --r-lg: 22px; --r-xl: 28px;
@@ -607,6 +607,11 @@ html[data-theme='dark'] .btn-primary { color: #0c0d1a; }
 .note-cornell { display: grid; grid-template-columns: 1fr; gap: 8px; }
 @media (min-width: 620px) { .note-cornell { grid-template-columns: 34% 1fr; } .note-cornell .wide { grid-column: 2; } .note-cornell .full2 { grid-column: 1 / -1; } }
 .formula-box { background: var(--gold-soft); border: 1px dashed color-mix(in srgb, var(--gold) 40%, transparent); border-radius: 11px; padding: 10px; }
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (min-width: 520px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+.stat-grid .stat { padding: 10px 11px; }
+.stat-grid .stat-v { font-size: 1.05rem; }
+
 .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .mini-grid .field label { font-size: .66rem; }
 .mini-grid .input { padding: 8px 9px; }
